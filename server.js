@@ -1,6 +1,3 @@
-// ================================
-// Practice Test Backend (Node.js)
-// ================================
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -9,15 +6,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Store active sessions in memory
+// Store active sessions
 let activeSessions = {};
 
 // === POST /login ===
 app.post("/login", (req, res) => {
   const { email } = req.body;
-  if (!email) {
-    return res.status(400).json({ error: "Email is required" });
-  }
+  if (!email) return res.status(400).json({ error: "Email is required" });
 
   const token = Math.random().toString(36).substring(2);
   activeSessions[email] = token;
@@ -29,23 +24,17 @@ app.post("/login", (req, res) => {
 // === POST /validate ===
 app.post("/validate", (req, res) => {
   const { email, token } = req.body;
-  if (!email || !token) {
-    return res.json({ valid: false });
-  }
-
-  const valid = activeSessions[email] === token;
-  res.json({ valid });
+  if (!email || !token) return res.json({ valid: false });
+  res.json({ valid: activeSessions[email] === token });
 });
 
-// ✅ Serve frontend (index.html + static files)
-// Put all your frontend files inside /public
-app.use(express.static(path.join(__dirname, "public")));
+// ✅ Serve static frontend from Public folder
+app.use(express.static(path.join(__dirname, "Public")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "Public", "index.html"));
 });
 
-// Render/Heroku/other platforms provide PORT in environment
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
