@@ -212,6 +212,8 @@
   </div>
 
   <script>
+    const BACKEND_URL = "https://practice-test-backend.onrender.com";
+
     async function login() {
       const email = document.getElementById("emailInput").value.trim().toLowerCase();
       if (!email || !email.includes("@")) {
@@ -219,8 +221,7 @@
         return;
       }
 
-      // Call backend login API (replace URL after deploy)
-      const res = await fetch("https://your-backend.onrender.com/login", {
+      const res = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })
@@ -238,13 +239,12 @@
       }
     }
 
-    // Auto-login if token still valid
     window.onload = async function() {
       const savedEmail = localStorage.getItem("studentEmail");
       const token = localStorage.getItem("sessionToken");
       if (!savedEmail || !token) return;
 
-      const res = await fetch("https://your-backend.onrender.com/validate", {
+      const res = await fetch(`${BACKEND_URL}/validate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: savedEmail, token })
@@ -259,13 +259,12 @@
       }
     };
 
-    // Periodically validate session
     setInterval(async () => {
       const email = localStorage.getItem("studentEmail");
       const token = localStorage.getItem("sessionToken");
       if (!email || !token) return;
 
-      const res = await fetch("https://your-backend.onrender.com/validate", {
+      const res = await fetch(`${BACKEND_URL}/validate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, token })
@@ -281,7 +280,7 @@
 
     // === Catalog JSON ===
     const catalog = {
- "IIT-JEE": {
+        "IIT-JEE": {
         "Physics": {
           "Topic wise mcq (basic) Coming Soon": {
             "Chapter 1 - Coming Soon": {
