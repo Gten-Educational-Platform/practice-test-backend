@@ -133,7 +133,6 @@
       }
     }, 5000);
 
-    // === Catalog JSON (truncated for brevity) ===
     const catalog = {
       "Class 10": {
         "Science": {
@@ -176,7 +175,6 @@
       const itemSelect = document.getElementById("itemSelect");
       const viewer = document.getElementById("viewer");
 
-      // Populate classes
       classSelect.innerHTML = "<option value=''>Select Class</option>" +
         Object.keys(catalog).map(cls => `<option value="${cls}">${cls}</option>`).join("");
 
@@ -234,7 +232,14 @@
       itemSelect.onchange = () => {
         const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value, ch = chapterSelect.value, it = itemSelect.value;
         if (cls && sub && lvl && ch && it && catalog[cls][sub][lvl][ch][it]) {
-          viewer.src = catalog[cls][sub][lvl][ch][it];
+          const url = catalog[cls][sub][lvl][ch][it];
+          viewer.src = url;
+
+          // Fallback: if iframe is blocked, open in new tab
+          setTimeout(() => {
+            try { viewer.contentWindow.document; }
+            catch(e) { window.open(url, "_blank"); viewer.src = ""; }
+          }, 500);
         } else viewer.src = "";
       };
     }
