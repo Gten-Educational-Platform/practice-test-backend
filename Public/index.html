@@ -24,8 +24,8 @@
     select:hover, button:hover { background-color: #b2dfdb; }
     button.back-btn { background-color: #b71c1c; color: white; white-space: nowrap; font-size: 12px; padding: 5px 10px; flex-shrink: 0; }
     button.back-btn:hover { background-color: #7f0000; }
-    button.invoice-btn { background-color: #004D40; color: white; white-space: nowrap; font-size: 12px; padding: 5px 10px; flex-shrink: 0; }
-    button.invoice-btn:hover { background-color: #00251a; }
+    button.invoice-btn { background-color: #006064; color: white; white-space: nowrap; font-size: 12px; padding: 5px 10px; flex-shrink: 0; }
+    button.invoice-btn:hover { background-color: #004D40; }
     iframe { width: 100%; height: 450px; border: 2px solid #004D40; margin-top: 15px; border-radius: 6px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); transition: height 0.4s ease; }
     @media (max-width: 600px) {
       body { font-size: 12px; }
@@ -56,8 +56,10 @@
   <div id="appContainer">
     <div class="header-bar" id="headerBar">
       <h1>Practice Test</h1>
-      <button id="backBtn" class="back-btn" onclick="resetAll()">Back</button>
-      <button class="invoice-btn" onclick="window.open('https://gten-educational-platform.github.io/Class-12/bill 102.html','_blank')">INVOICE</button>
+      <div style="display:flex; gap:6px;">
+        <button id="backBtn" class="back-btn" onclick="resetAll()">Back</button>
+        <button class="invoice-btn" onclick="window.open('https://gten-educational-platform.github.io/Class-12/bill 102.html','_blank')">INVOICE</button>
+      </div>
     </div>
 
     <div id="controls">
@@ -178,6 +180,7 @@
       const itemSelect = document.getElementById("itemSelect");
       const viewer = document.getElementById("viewer");
 
+      // Populate classes
       classSelect.innerHTML = "<option value=''>Select Class</option>" +
         Object.keys(catalog).map(cls => `<option value="${cls}">${cls}</option>`).join("");
 
@@ -237,11 +240,10 @@
         if (cls && sub && lvl && ch && it && catalog[cls][sub][lvl][ch][it]) {
           const url = catalog[cls][sub][lvl][ch][it];
           viewer.src = url;
-
           setTimeout(() => {
             try { viewer.contentWindow.document; }
             catch(e) { window.open(url, "_blank"); viewer.src = ""; }
-          }, 500);
+          }, 100);
         } else viewer.src = "";
       };
     }
