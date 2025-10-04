@@ -24,14 +24,12 @@
     select:hover, button:hover { background-color: #b2dfdb; }
     button.back-btn { background-color: #b71c1c; color: white; white-space: nowrap; font-size: 12px; padding: 5px 10px; flex-shrink: 0; }
     button.back-btn:hover { background-color: #7f0000; }
-    iframe { width: 100%; height: 450px; border: 2px solid #004D40; margin-top: 15px; border-radius: 6px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); transition: height 0.4s ease; }
     @media (max-width: 600px) {
       body { font-size: 12px; }
       .header-bar h1 { font-size: 14px; }
       label { font-size: 11px; }
       select, button { width: 100%; font-size: 11px; padding: 4px 6px; margin-top: 8px; }
       .header-bar { flex-wrap: nowrap; }
-      iframe { height: 350px; }
     }
     select { white-space: normal !important; height: auto; line-height: 1.2em; }
     select option { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
@@ -75,8 +73,6 @@
       <label id="topicLabel" for="itemSelect">Topic / Year:</label>
       <select id="itemSelect" disabled><option value="">Select Topic / Year</option></select>
     </div>
-
-    <iframe id="viewer" src=""></iframe>
   </div>
 
   <script>
@@ -133,7 +129,7 @@
       }
     }, 5000);
 
-    // === Catalog JSON (truncated for brevity) ===
+    // === Catalog JSON (example) ===
     const catalog = {
       "Class 10": {
         "Science": {
@@ -165,7 +161,6 @@
       document.getElementById("chapterSelect").disabled = true;
       document.getElementById("itemSelect").innerHTML = "<option value=''>Select Topic / Year</option>";
       document.getElementById("itemSelect").disabled = true;
-      document.getElementById("viewer").src = "";
     }
 
     function initDropdowns() {
@@ -174,7 +169,6 @@
       const levelSelect = document.getElementById("levelSelect");
       const chapterSelect = document.getElementById("chapterSelect");
       const itemSelect = document.getElementById("itemSelect");
-      const viewer = document.getElementById("viewer");
 
       // Populate classes
       classSelect.innerHTML = "<option value=''>Select Class</option>" +
@@ -185,7 +179,6 @@
         resetSelect(levelSelect, "Select Level / Years");
         resetSelect(chapterSelect, "Select Chapter");
         resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
         const cls = classSelect.value;
         if (cls && catalog[cls]) {
           subjectSelect.innerHTML = "<option value=''>Select Subject</option>" +
@@ -198,7 +191,6 @@
         resetSelect(levelSelect, "Select Level / Years");
         resetSelect(chapterSelect, "Select Chapter");
         resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
         const cls = classSelect.value;
         const sub = subjectSelect.value;
         if (cls && sub && catalog[cls][sub]) {
@@ -211,7 +203,6 @@
       levelSelect.onchange = () => {
         resetSelect(chapterSelect, "Select Chapter");
         resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
         const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value;
         if (cls && sub && lvl && catalog[cls][sub][lvl]) {
           chapterSelect.innerHTML = "<option value=''>Select Chapter</option>" +
@@ -222,7 +213,6 @@
 
       chapterSelect.onchange = () => {
         resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
         const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value, ch = chapterSelect.value;
         if (cls && sub && lvl && ch && catalog[cls][sub][lvl][ch]) {
           itemSelect.innerHTML = "<option value=''>Select Topic / Year</option>" +
@@ -234,8 +224,9 @@
       itemSelect.onchange = () => {
         const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value, ch = chapterSelect.value, it = itemSelect.value;
         if (cls && sub && lvl && ch && it && catalog[cls][sub][lvl][ch][it]) {
-          viewer.src = catalog[cls][sub][lvl][ch][it];
-        } else viewer.src = "";
+          const url = catalog[cls][sub][lvl][ch][it];
+          window.open(url, "_blank"); // 🔥 Open in new tab
+        }
       };
     }
 
