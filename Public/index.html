@@ -1,257 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Practice Test</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 15px;
-      background: linear-gradient(135deg, #f9f9f9, #e0f7fa);
-      color: #333;
-      font-size: 13px;
-    }
-    #loginContainer { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
-    #loginContainer input { padding: 8px; border: 2px solid #00796B; border-radius: 5px; font-size: 14px; margin-bottom: 10px; width: 250px; }
-    #loginContainer button { padding: 8px 12px; border: 2px solid #00796B; border-radius: 5px; background-color: #e0f2f1; color: #004D40; font-size: 13px; cursor: pointer; }
-    #loginContainer button:hover { background-color: #b2dfdb; }
-    #appContainer { display: none; }
-    .header-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; margin-bottom: 12px; min-width: 0; }
-    .header-bar h1 { color: #006064; font-size: 16px; margin: 0; white-space: nowrap; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-    label { font-weight: bold; color: #00796B; margin-right: 4px; font-size: 12px; }
-    select, button { margin: 4px; padding: 5px 8px; border: 2px solid #00796B; border-radius: 5px; background-color: #e0f2f1; color: #004D40; font-size: 12px; cursor: pointer; transition: all 0.3s ease; }
-    select:hover, button:hover { background-color: #b2dfdb; }
-    button.back-btn { background-color: #b71c1c; color: white; white-space: nowrap; font-size: 12px; padding: 5px 10px; flex-shrink: 0; }
-    button.back-btn:hover { background-color: #7f0000; }
-    button.invoice-btn { background-color: #006064; color: white; white-space: nowrap; font-size: 12px; padding: 5px 10px; flex-shrink: 0; }
-    button.invoice-btn:hover { background-color: #004D40; }
-    iframe { width: 100%; height: 450px; border: 2px solid #004D40; margin-top: 15px; border-radius: 6px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); transition: height 0.4s ease; }
-    @media (max-width: 600px) {
-      body { font-size: 12px; }
-      .header-bar h1 { font-size: 14px; }
-      label { font-size: 11px; }
-      select, button { width: 100%; font-size: 11px; padding: 4px 6px; margin-top: 8px; }
-      .header-bar { flex-wrap: nowrap; }
-      iframe { height: 350px; }
-    }
-    select { white-space: normal !important; height: auto; line-height: 1.2em; }
-    select option { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
-    select option:nth-child(even) { background-color: #e8f4ff; }
-    select option:nth-child(odd) { background-color: #ffffff; }
-    .hidden { display: none; }
-    .inline-topic { display: flex; align-items: center; gap: 4px; margin-left: auto; font-size: 12px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Test</title>
+<style>
+body { font-family: sans-serif; margin:15px; background: linear-gradient(135deg,#f9f9f9,#e0f7fa); color:#333; font-size:13px; }
+#loginContainer { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; }
+#loginContainer input { padding:8px; border:2px solid #00796B; border-radius:5px; font-size:14px; margin-bottom:10px; width:250px; }
+#loginContainer button { padding:8px 12px; border:2px solid #00796B; border-radius:5px; background-color:#e0f2f1; color:#004D40; font-size:13px; cursor:pointer; }
+#loginContainer button:hover { background-color:#b2dfdb; }
+#appContainer { display:none; }
+.header-bar { display:flex; align-items:center; justify-content:space-between; flex-wrap:nowrap; gap:8px; margin-bottom:12px; min-width:0; }
+.header-bar h1 { color:#006064; font-size:16px; margin:0; white-space:nowrap; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+label { font-weight:bold; color:#00796B; margin-right:4px; font-size:12px; }
+select, button { margin:4px; padding:5px 8px; border:2px solid #00796B; border-radius:5px; background-color:#e0f2f1; color:#004D40; font-size:12px; cursor:pointer; transition:all 0.3s ease; }
+select:hover, button:hover { background-color:#b2dfdb; }
+button.back-btn { background-color:#b71c1c; color:white; white-space:nowrap; font-size:12px; padding:5px 10px; flex-shrink:0; }
+button.back-btn:hover { background-color:#7f0000; }
+button.invoice-btn { background-color:#006064; color:white; white-space:nowrap; font-size:12px; padding:5px 10px; flex-shrink:0; }
+button.invoice-btn:hover { background-color:#004D40; }
+iframe { width:100%; height:450px; border:2px solid #004D40; margin-top:15px; border-radius:6px; box-shadow:0 3px 6px rgba(0,0,0,0.1); transition:height 0.4s ease; }
+@media (max-width:600px) {
+  body{font-size:12px;}
+  .header-bar h1{font-size:14px;}
+  label{font-size:11px;}
+  select, button{width:100%; font-size:11px; padding:4px 6px; margin-top:8px;}
+  .header-bar{flex-wrap:nowrap;}
+  iframe{height:350px;}
+}
+select{white-space:normal !important; height:auto; line-height:1.2em;}
+select option{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:12px;}
+select option:nth-child(even){background-color:#e8f4ff;}
+select option:nth-child(odd){background-color:#ffffff;}
+.hidden{display:none;}
+.inline-topic{display:flex; align-items:center; gap:4px; margin-left:auto; font-size:12px;}
+</style>
 </head>
-
 <body>
-  <!-- Login Screen -->
-  <div id="loginContainer">
-    <h2>Login to Practice Test</h2>
-    <input type="email" id="emailInput" placeholder="Enter your email" required />
-    <button onclick="login()">Login</button>
+
+<div id="loginContainer">
+  <h2>Login to Practice Test</h2>
+  <input type="email" id="emailInput" placeholder="Enter your email" required>
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="appContainer">
+  <div class="header-bar" id="headerBar">
+    <h1>Practice Test</h1>
+    <div style="display:flex; gap:6px;">
+      <button class="back-btn" onclick="resetAll()">Back</button>
+      <button class="invoice-btn" onclick="window.open('https://gten-educational-platform.github.io/Class-12/bill 102.html','_blank')">INVOICE</button>
+    </div>
   </div>
 
-  <!-- Main App -->
-  <div id="appContainer">
-    <div class="header-bar" id="headerBar">
-      <h1>Practice Test</h1>
-      <div style="display:flex; gap:6px;">
-        <button id="backBtn" class="back-btn" onclick="resetAll()">Back</button>
-        <button class="invoice-btn" onclick="window.open('https://gten-educational-platform.github.io/Class-12/bill 102.html','_blank')">INVOICE</button>
-      </div>
-    </div>
+  <div id="controls">
+    <label for="classSelect">Class:</label>
+    <select id="classSelect"><option value="">Select Class</option></select>
 
-    <div id="controls">
-      <label for="classSelect">Class:</label>
-      <select id="classSelect"><option value="">Select Class</option></select>
+    <label for="subjectSelect">Subject:</label>
+    <select id="subjectSelect" disabled><option value="">Select Subject</option></select>
 
-      <label for="subjectSelect">Subject:</label>
-      <select id="subjectSelect" disabled><option value="">Select Subject</option></select>
+    <label for="levelSelect">Level / Years:</label>
+    <select id="levelSelect" disabled><option value="">Select Level / Years</option></select>
 
-      <label for="levelSelect">Level / Years:</label>
-      <select id="levelSelect" disabled><option value="">Select Level / Years</option></select>
-
-      <label for="chapterSelect">Chapter:</label>
-      <select id="chapterSelect" disabled><option value="">Select Chapter</option></select>
-    </div>
-
-    <div id="topicRow">
-      <label id="topicLabel" for="itemSelect">Topic / Year:</label>
-      <select id="itemSelect" disabled><option value="">Select Topic / Year</option></select>
-    </div>
-
-    <iframe id="viewer" src=""></iframe>
+    <label for="chapterSelect">Chapter:</label>
+    <select id="chapterSelect" disabled><option value="">Select Chapter</option></select>
   </div>
 
-  <script>
-    const BACKEND_URL = "https://practice-test-backend.onrender.com";
+  <div id="topicRow">
+    <label id="topicLabel" for="itemSelect">Topic / Year:</label>
+    <select id="itemSelect" disabled><option value="">Select Topic / Year</option></select>
+  </div>
 
-    async function login() {
-      const email = document.getElementById("emailInput").value.trim().toLowerCase();
-      if (!email || !email.includes("@")) {
-        alert("Your E.Mail ID is not Registered. For registration call +91 9706380857.");
-        return;
-      }
-      const res = await fetch(`${BACKEND_URL}/login`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-      });
-      const data = await res.json();
-      if (data.token) {
-        localStorage.setItem("studentEmail", email);
-        localStorage.setItem("sessionToken", data.token);
-        document.getElementById("loginContainer").style.display = "none";
-        document.getElementById("appContainer").style.display = "block";
-        initDropdowns();
-      } else { alert("Login failed. Try again."); }
+  <iframe id="viewer" src=""></iframe>
+</div>
+
+<script>
+const BACKEND_URL="https://practice-test-backend.onrender.com";
+
+// Simple login simulation
+async function login() {
+  const email=document.getElementById("emailInput").value.trim().toLowerCase();
+  if(!email||!email.includes("@")){alert("Your E.Mail ID is not Registered. For registration call +91 9706380857."); return;}
+  const res=await fetch(`${BACKEND_URL}/login`, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email})});
+  const data=await res.json();
+  if(data.token){
+    localStorage.setItem("studentEmail", email);
+    localStorage.setItem("sessionToken", data.token);
+    document.getElementById("loginContainer").style.display="none";
+    document.getElementById("appContainer").style.display="block";
+    initDropdowns();
+  } else {alert("Login failed. Try again.");}
+}
+
+window.onload=async function(){
+  const savedEmail=localStorage.getItem("studentEmail");
+  const token=localStorage.getItem("sessionToken");
+  if(!savedEmail||!token) return;
+  const res=await fetch(`${BACKEND_URL}/validate`, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email:savedEmail, token})});
+  const data=await res.json();
+  if(data.valid){document.getElementById("loginContainer").style.display="none"; document.getElementById("appContainer").style.display="block"; initDropdowns();} else{localStorage.clear();}
+}
+
+setInterval(async ()=>{
+  const email=localStorage.getItem("studentEmail");
+  const token=localStorage.getItem("sessionToken");
+  if(!email||!token) return;
+  const res=await fetch(`${BACKEND_URL}/validate`, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email,token})});
+  const data=await res.json();
+  if(!data.valid){alert("⚠️ You have been logged out because this account was opened on another device."); localStorage.clear(); location.reload();}
+},5000);
+
+// Catalog JSON
+const catalog={
+"IIT-JEE":{"Physics":{"Topic wise mcq (basic)":{"Chapter 1 - UNITS, DIMENSIONS AND MEASUREMENT":{"1. Units, Dimensions and Measurement":"https://github.com/g10educationalplatform-physics/IIT-JEE-E--Units-and-Measurement"}}}}
+};
+
+// Reset selections
+function resetAll(){
+  document.getElementById("classSelect").value="";
+  document.getElementById("subjectSelect").innerHTML="<option value=''>Select Subject</option>"; document.getElementById("subjectSelect").disabled=true;
+  document.getElementById("levelSelect").innerHTML="<option value=''>Select Level / Years</option>"; document.getElementById("levelSelect").disabled=true;
+  document.getElementById("chapterSelect").innerHTML="<option value=''>Select Chapter</option>"; document.getElementById("chapterSelect").disabled=true;
+  document.getElementById("itemSelect").innerHTML="<option value=''>Select Topic / Year</option>"; document.getElementById("itemSelect").disabled=true;
+  document.getElementById("viewer").src="";
+}
+
+// Detect if iframe can load the URL
+function loadURL(url){
+  const iframe=document.getElementById("viewer");
+  // Attempt to load and detect error
+  iframe.src=url;
+  const timeout=setTimeout(()=>{
+    try{iframe.contentWindow.document;}
+    catch(e){window.open(url,"_blank"); iframe.src="";}
+  },500);
+}
+
+// Initialize dropdowns
+function initDropdowns(){
+  const classSelect=document.getElementById("classSelect");
+  const subjectSelect=document.getElementById("subjectSelect");
+  const levelSelect=document.getElementById("levelSelect");
+  const chapterSelect=document.getElementById("chapterSelect");
+  const itemSelect=document.getElementById("itemSelect");
+
+  classSelect.innerHTML="<option value=''>Select Class</option>"+Object.keys(catalog).map(cls=>`<option value="${cls}">${cls}</option>`).join("");
+
+  classSelect.onchange=()=>{
+    resetSelect(subjectSelect,"Select Subject");
+    resetSelect(levelSelect,"Select Level / Years");
+    resetSelect(chapterSelect,"Select Chapter");
+    resetSelect(itemSelect,"Select Topic / Year");
+    const cls=classSelect.value;
+    if(cls && catalog[cls]){
+      subjectSelect.innerHTML="<option value=''>Select Subject</option>"+Object.keys(catalog[cls]).map(sub=>`<option value="${sub}">${sub}</option>`).join("");
+      subjectSelect.disabled=false;
     }
+  };
 
-    window.onload = async function() {
-      const savedEmail = localStorage.getItem("studentEmail");
-      const token = localStorage.getItem("sessionToken");
-      if (!savedEmail || !token) return;
-      const res = await fetch(`${BACKEND_URL}/validate`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: savedEmail, token })
-      });
-      const data = await res.json();
-      if (data.valid) {
-        document.getElementById("loginContainer").style.display = "none";
-        document.getElementById("appContainer").style.display = "block";
-        initDropdowns();
-      } else { localStorage.clear(); }
-    };
-
-    setInterval(async () => {
-      const email = localStorage.getItem("studentEmail");
-      const token = localStorage.getItem("sessionToken");
-      if (!email || !token) return;
-      const res = await fetch(`${BACKEND_URL}/validate`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, token })
-      });
-      const data = await res.json();
-      if (!data.valid) {
-        alert("⚠️ You have been logged out because this account was opened on another device.");
-        localStorage.clear(); location.reload();
-      }
-    }, 5000);
-
-    const catalog = {
-      "Class 10": {
-        "Science": {
-          "Topic wise mcq (basic)": {
-            "Chapter 1 - Chemical Reaction And Equation": {
-              "16. Rancidity": "https://class-103.github.io/Class-10-Science-10-E--Che-Rec---Equation/16. Rancidity.html"
-            }
-          }
-        }
-      },
-      "IIT-JEE": {
-        "Physics": {
-          "Topic wise mcq (basic)": {
-            "Chapter 1 - UNITS, DIMENSIONS AND MEASUREMENT": {
-              "1. Units, Dimensions and Measurement": "https://github.com/g10educationalplatform-physics/IIT-JEE-E--Units-and-Measurement"
-            }
-          }
-        }
-      }
-    };
-
-    function resetAll() {
-      document.getElementById("classSelect").value = "";
-      document.getElementById("subjectSelect").innerHTML = "<option value=''>Select Subject</option>";
-      document.getElementById("subjectSelect").disabled = true;
-      document.getElementById("levelSelect").innerHTML = "<option value=''>Select Level / Years</option>";
-      document.getElementById("levelSelect").disabled = true;
-      document.getElementById("chapterSelect").innerHTML = "<option value=''>Select Chapter</option>";
-      document.getElementById("chapterSelect").disabled = true;
-      document.getElementById("itemSelect").innerHTML = "<option value=''>Select Topic / Year</option>";
-      document.getElementById("itemSelect").disabled = true;
-      document.getElementById("viewer").src = "";
+  subjectSelect.onchange=()=>{
+    resetSelect(levelSelect,"Select Level / Years");
+    resetSelect(chapterSelect,"Select Chapter");
+    resetSelect(itemSelect,"Select Topic / Year");
+    const cls=classSelect.value;
+    const sub=subjectSelect.value;
+    if(cls && sub && catalog[cls][sub]){
+      levelSelect.innerHTML="<option value=''>Select Level / Years</option>"+Object.keys(catalog[cls][sub]).map(lvl=>`<option value="${lvl}">${lvl}</option>`).join("");
+      levelSelect.disabled=false;
     }
+  };
 
-    function initDropdowns() {
-      const classSelect = document.getElementById("classSelect");
-      const subjectSelect = document.getElementById("subjectSelect");
-      const levelSelect = document.getElementById("levelSelect");
-      const chapterSelect = document.getElementById("chapterSelect");
-      const itemSelect = document.getElementById("itemSelect");
-      const viewer = document.getElementById("viewer");
-
-      // Populate classes
-      classSelect.innerHTML = "<option value=''>Select Class</option>" +
-        Object.keys(catalog).map(cls => `<option value="${cls}">${cls}</option>`).join("");
-
-      classSelect.onchange = () => {
-        subjectSelect.disabled = true; resetSelect(subjectSelect, "Select Subject");
-        resetSelect(levelSelect, "Select Level / Years");
-        resetSelect(chapterSelect, "Select Chapter");
-        resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
-        const cls = classSelect.value;
-        if (cls && catalog[cls]) {
-          subjectSelect.innerHTML = "<option value=''>Select Subject</option>" +
-            Object.keys(catalog[cls]).map(sub => `<option value="${sub}">${sub}</option>`).join("");
-          subjectSelect.disabled = false;
-        }
-      };
-
-      subjectSelect.onchange = () => {
-        resetSelect(levelSelect, "Select Level / Years");
-        resetSelect(chapterSelect, "Select Chapter");
-        resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
-        const cls = classSelect.value;
-        const sub = subjectSelect.value;
-        if (cls && sub && catalog[cls][sub]) {
-          levelSelect.innerHTML = "<option value=''>Select Level / Years</option>" +
-            Object.keys(catalog[cls][sub]).map(lvl => `<option value="${lvl}">${lvl}</option>`).join("");
-          levelSelect.disabled = false;
-        }
-      };
-
-      levelSelect.onchange = () => {
-        resetSelect(chapterSelect, "Select Chapter");
-        resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
-        const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value;
-        if (cls && sub && lvl && catalog[cls][sub][lvl]) {
-          chapterSelect.innerHTML = "<option value=''>Select Chapter</option>" +
-            Object.keys(catalog[cls][sub][lvl]).map(ch => `<option value="${ch}">${ch}</option>`).join("");
-          chapterSelect.disabled = false;
-        }
-      };
-
-      chapterSelect.onchange = () => {
-        resetSelect(itemSelect, "Select Topic / Year");
-        viewer.src = "";
-        const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value, ch = chapterSelect.value;
-        if (cls && sub && lvl && ch && catalog[cls][sub][lvl][ch]) {
-          itemSelect.innerHTML = "<option value=''>Select Topic / Year</option>" +
-            Object.keys(catalog[cls][sub][lvl][ch]).map(it => `<option value="${it}">${it}</option>`).join("");
-          itemSelect.disabled = false;
-        }
-      };
-
-      itemSelect.onchange = () => {
-        const cls = classSelect.value, sub = subjectSelect.value, lvl = levelSelect.value, ch = chapterSelect.value, it = itemSelect.value;
-        if (cls && sub && lvl && ch && it && catalog[cls][sub][lvl][ch][it]) {
-          const url = catalog[cls][sub][lvl][ch][it];
-          viewer.src = url;
-          setTimeout(() => {
-            try { viewer.contentWindow.document; }
-            catch(e) { window.open(url, "_blank"); viewer.src = ""; }
-          }, 100);
-        } else viewer.src = "";
-      };
+  levelSelect.onchange=()=>{
+    resetSelect(chapterSelect,"Select Chapter");
+    resetSelect(itemSelect,"Select Topic / Year");
+    const cls=classSelect.value, sub=subjectSelect.value, lvl=levelSelect.value;
+    if(cls && sub && lvl && catalog[cls][sub][lvl]){
+      chapterSelect.innerHTML="<option value=''>Select Chapter</option>"+Object.keys(catalog[cls][sub][lvl]).map(ch=>`<option value="${ch}">${ch}</option>`).join("");
+      chapterSelect.disabled=false;
     }
+  };
 
-    function resetSelect(select, placeholder) {
-      select.innerHTML = `<option value="">${placeholder}</option>`;
-      select.disabled = true;
+  chapterSelect.onchange=()=>{
+    resetSelect(itemSelect,"Select Topic / Year");
+    const cls=classSelect.value, sub=subjectSelect.value, lvl=levelSelect.value, ch=chapterSelect.value;
+    if(cls && sub && lvl && ch && catalog[cls][sub][lvl][ch]){
+      itemSelect.innerHTML="<option value=''>Select Topic / Year</option>"+Object.keys(catalog[cls][sub][lvl][ch]).map(it=>`<option value="${it}">${it}</option>`).join("");
+      itemSelect.disabled=false;
     }
-  </script>
+  };
+
+  itemSelect.onchange=()=>{
+    const cls=classSelect.value, sub=subjectSelect.value, lvl=levelSelect.value, ch=chapterSelect.value, it=itemSelect.value;
+    if(cls && sub && lvl && ch && it && catalog[cls][sub][lvl][ch][it]){
+      loadURL(catalog[cls][sub][lvl][ch][it]);
+    }
+  };
+}
+
+function resetSelect(select, placeholder){
+  select.innerHTML=`<option value="">${placeholder}</option>`;
+  select.disabled=true;
+}
+</script>
 </body>
 </html>
